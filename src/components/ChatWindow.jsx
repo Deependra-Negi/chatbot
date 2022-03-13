@@ -10,14 +10,14 @@ function ChatWindow() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    let msgs = JSON.parse(localStorage.getItem('messages'));
+    let msgs = localStorage.getItem('messages');
     
     handleFocus();
 
-    if (msgs === null) {
+    if (msgs == null) {
       setData([])
     } else {
-      setData(msgs)
+      setData(JSON.parse(msgs))
     }
   },[msg])
   
@@ -27,7 +27,7 @@ function ChatWindow() {
   }
 
   function handleSend(e) {
-    if (localStorage.getItem('messages') === undefined) {
+    if (localStorage.getItem('messages') == null) {
       localStorage.setItem('messages', JSON.stringify([msg]));
     }
     else {
@@ -50,7 +50,7 @@ function ChatWindow() {
   return (
     <>
       
-      <div>{data.map((el) => {
+      <div>{data.length>0 ? data.map((el) => {
         return (
           <div className={styles.container}>
             <div className={styles.reply}>
@@ -61,7 +61,7 @@ function ChatWindow() {
             </div>
           </div>
           ) 
-      })}</div>
+      }):<div></div>}</div>
       <div className={styles.footer}>
         <div className={styles.inputCont}>
           <input ref={inpRef} value={msg} onChange={handleChange} onKeyPress={handleEnter} type="text" />
