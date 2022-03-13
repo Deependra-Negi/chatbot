@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import styles from './ChatWindow.module.css'
 import Message from './Message';
 import Reply from './Reply';
+import { v4 as uuid } from 'uuid';
 
 function ChatWindow() {
 
@@ -54,10 +55,10 @@ function ChatWindow() {
         return (
           <div className={styles.container}>
             <div className={styles.reply}>
-            <Reply  reply={el}/>
+            <Reply key={uuid()}  reply={el}/>
             </div>
             <div className={styles.user}>
-            <Message  message={el} />
+            <Message key={uuid()} message={el} />
             </div>
           </div>
           ) 
