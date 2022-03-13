@@ -1,0 +1,76 @@
+.container{
+    padding: 1rem 4rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.user{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.reply{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+.footer{
+    position: sticky;
+    bottom: 0%;
+    background-color: #000cb8;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 1.5rem;
+    width: 100%;
+}
+.inputCont{
+    display: flex;
+    flex-grow: 1;
+}
+.footer input{
+    min-height: 50px;
+    margin: 0 0.5rem;
+    flex-grow: 1;
+    font-size: 1rem;
+    border: 0;
+    border-radius: 10px;
+    padding: 0 12px;
+    background-color: #eaeef0;
+}
+.footer button{
+    min-height: 50px;
+    min-width: 80px;
+    width: 7vw;
+    background-color: #050505;
+    border: none;
+    color: #eaeef0;
+    font-size: large;
+}
+
+@media screen and (max-width: 1024px) {
+  .container{
+    padding: 1rem 2rem;
+}
+.footer{
+    padding: 0.3rem 1rem;
+}
+}
+
+@media screen and (max-width: 768px) {
+  .container{
+    padding: 1rem 1rem;
+}
+.footer{
+    padding: 0.5rem 0.5rem;
+    
+}
+.footer input{
+    height: 35px;
+    margin: 0 0.2rem;
+    padding: 0 4px;
+}
+.footer button{
+    height: 35px;
+    width: 7vw;
+}
+}

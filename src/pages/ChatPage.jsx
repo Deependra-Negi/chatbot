@@ -4,10 +4,10 @@ import Header from '../components/Header'
 
 function ChatPage() {
   return (
-    <>
+    <div>
         <Header />
         <ChatWindow/>
-    </>
+    </div>
   )
 }
 
