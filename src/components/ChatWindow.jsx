@@ -49,7 +49,7 @@ function ChatWindow() {
     }
   }
   return (
-    <>
+    <div className={styles.chatWindow}>
       
       <div>{data.length>0 ? data.map((el) => {
         return (
@@ -62,7 +62,8 @@ function ChatWindow() {
             </div>
           </div>
           ) 
-      }):<div></div>}</div>
+      }) : <div></div>}
+      </div>
       <div className={styles.footer}>
         <div className={styles.inputCont}>
           <input ref={inpRef} value={msg} onChange={handleChange} onKeyPress={handleEnter} type="text" />
@@ -72,7 +73,7 @@ function ChatWindow() {
         </div>
       </div>
       
-    </>
+    </div>
   )
 }
 
