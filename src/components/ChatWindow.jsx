@@ -6,14 +6,20 @@ import { v4 as uuid } from 'uuid';
 
 function ChatWindow() {
 
-  const inpRef = useRef(null);
+  const scrollRef = useRef();
+  // const inpRef = useRef(null);
   const [msg, setMsg] = useState("");
   const [data, setData] = useState([]);
+
+    useEffect(() => {
+    //to scroll into view of new message
+    scrollRef?.current?.scrollIntoView({ behavior: "smooth" });
+  }, []);
 
   useEffect(() => {
     let msgs = localStorage.getItem('messages');
     
-    handleFocus();
+    // handleFocus();
 
     if (msgs == null) {
       setData([])
@@ -22,10 +28,11 @@ function ChatWindow() {
     }
   },[msg])
   
+
   //focus on input field on page load
-  function handleFocus() {
-    inpRef.current.focus();
-  }
+  // function handleFocus() {
+  //   inpRef.current.focus();
+  // }
 
   function handleSend(e) {
     if (localStorage.getItem('messages') == null) {
@@ -37,6 +44,9 @@ function ChatWindow() {
       localStorage.setItem('messages', JSON.stringify(arr));
     }
     setMsg('')
+    setTimeout(() => {
+      scrollRef?.current?.scrollIntoView({ behavior: "smooth" });
+    }, 0);
   }
 
   function handleChange(e) {
@@ -51,14 +61,14 @@ function ChatWindow() {
   return (
     <div className={styles.chatWindow}>
       
-      <div>{data.length>0 ? data.map((el) => {
+      <div >{data.length>0 ? data.map((el) => {
         return (
-          <div className={styles.container}>
+          <div key={uuid()} className={styles.container}>
             <div className={styles.reply}>
-            <Reply key={uuid()}  reply={el}/>
+            <Reply reply={el}/>
             </div>
-            <div className={styles.user}>
-            <Message key={uuid()} message={el} />
+            <div ref={scrollRef} className={styles.user}>
+            <Message message={el} />
             </div>
           </div>
           ) 
@@ -66,7 +76,8 @@ function ChatWindow() {
       </div>
       <div className={styles.footer}>
         <div className={styles.inputCont}>
-          <input ref={inpRef} value={msg} onChange={handleChange} onKeyPress={handleEnter} type="text" />
+          <input value={msg} onChange={handleChange} onKeyPress={handleEnter} type="text" />
+          {/* <input ref={inpRef} value={msg} onChange={handleChange} onKeyPress={handleEnter} type="text" /> */}
         </div>
         <div className={styles.buttonCont}>
           <button onClick={handleSend}>Send</button>
