@@ -10,6 +10,7 @@ function ChatWindow({chatFlag}) {
   const scrollRef = useRef();
   const [msg, setMsg] = useState("");
   const [data, setData] = useState([]);
+  const [empty, setEmpty] = useState(true);
 
     useEffect(() => {
     //to scroll into view of new message
@@ -20,8 +21,10 @@ function ChatWindow({chatFlag}) {
 
   useEffect(() => {
     if (msgs == null) {
+      setEmpty(true);
       setData([])
     } else {
+      setEmpty(false);
       setData(JSON.parse(msgs))
     }
   }, [msgs,chatFlag])
@@ -56,20 +59,23 @@ function ChatWindow({chatFlag}) {
   }
   return (
     <div className={styles.chatWindow}>
-      
-      <div >{data.length>0 ? data.map((el) => {
-        return (
-          <div key={uuid()} className={styles.container}>
-            <div className={styles.reply}>
-            <Reply reply={el}/>
+      {empty ?
+        <div className={styles.emptyMsg}>
+          <h2>No messages yet!</h2>
+        </div> :
+        <div >{data.length > 0 ? data.map((el) => {
+          return (
+            <div key={uuid()} className={styles.container}>
+              <div className={styles.reply}>
+                <Reply reply={el} />
+              </div>
+              <div ref={scrollRef} className={styles.user}>
+                <Message message={el} />
+              </div>
             </div>
-            <div ref={scrollRef} className={styles.user}>
-            <Message message={el} />
-            </div>
-          </div>
-          ) 
-      }) : <div></div>}
-      </div>
+          )
+        }) : <div></div>}
+        </div>}
       <div className={styles.footer}>
         <div className={styles.inputCont}>
           <input value={msg} onChange={handleChange} onKeyPress={handleEnter} type="text" />
@@ -80,7 +86,6 @@ function ChatWindow({chatFlag}) {
           </button>
         </div>
       </div>
-      
     </div>
   )
 }
