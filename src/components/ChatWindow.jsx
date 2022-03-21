@@ -1,38 +1,34 @@
 import React, { useEffect, useState, useRef } from 'react'
+import { BiSend } from 'react-icons/bi';
 import styles from './ChatWindow.module.css'
 import Message from './Message';
 import Reply from './Reply';
 import { v4 as uuid } from 'uuid';
 
-function ChatWindow() {
+function ChatWindow({chatFlag}) {
 
   const scrollRef = useRef();
-  // const inpRef = useRef(null);
   const [msg, setMsg] = useState("");
   const [data, setData] = useState([]);
 
     useEffect(() => {
     //to scroll into view of new message
     scrollRef?.current?.scrollIntoView({ behavior: "smooth" });
-  }, []);
+    }, []);
+  
+  let msgs = localStorage.getItem('messages');
 
   useEffect(() => {
-    let msgs = localStorage.getItem('messages');
-    
-    // handleFocus();
-
     if (msgs == null) {
       setData([])
     } else {
       setData(JSON.parse(msgs))
     }
-  },[msg])
-  
+  }, [msgs,chatFlag])
 
-  //focus on input field on page load
-  // function handleFocus() {
-  //   inpRef.current.focus();
-  // }
+
+
+  // let msgss = localStorage.getItem('messages');
 
   function handleSend(e) {
     if (localStorage.getItem('messages') == null) {
@@ -77,10 +73,11 @@ function ChatWindow() {
       <div className={styles.footer}>
         <div className={styles.inputCont}>
           <input value={msg} onChange={handleChange} onKeyPress={handleEnter} type="text" />
-          {/* <input ref={inpRef} value={msg} onChange={handleChange} onKeyPress={handleEnter} type="text" /> */}
         </div>
         <div className={styles.buttonCont}>
-          <button onClick={handleSend}>Send</button>
+          <button onClick={handleSend} title="send">
+            <div style={{display:"flex", justifyContent:"center"}}><div>Send</div><BiSend /></div>
+          </button>
         </div>
       </div>
       

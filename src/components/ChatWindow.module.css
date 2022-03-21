@@ -46,12 +46,22 @@
     min-height: 50px;
     min-width: 80px;
     width: 7vw;
-    background-color: #050505;
+    background-color: #fff;
     border: none;
-    color: #eaeef0;
+    font-weight: bold;
+    color: #0f00e6;
     font-size: large;
+    border: 1px solid rgb(15, 15, 15);
+    align-items: center;
 }
-
+.footer svg{
+    margin-top: 2px;
+    padding-left: 2px;
+}
+.footer button:hover{
+    background-color: #584cff;
+    color: #fff;
+}
 @media screen and (max-width: 1024px) {
   .container{
     padding: 1rem 2rem;

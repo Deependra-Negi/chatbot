@@ -5,11 +5,23 @@
     display: flex;
     top: 0%;
     position: sticky;
+    display: flex;
+    justify-content: space-between;
+}
+.profile{
+    display: flex;
+}
+.clearBtn{
+    cursor: pointer;
+    font-size: 1.4rem;
+}
+.clearBtn:hover{
+    color: #e9e9e9;
 }
 .container div:first-child{
     padding: 5px;
 }
-.container div:last-child{
+.container div:nth-child(2){
     font-size: large;
     font-weight: bold;
     padding:2px 5px;
